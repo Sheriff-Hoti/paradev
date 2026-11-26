@@ -9,6 +9,7 @@ import type { CodeEditorAdapter } from "renderer/routes/_authenticated/component
 import { detectLanguage } from "shared/detect-language";
 import type { ViewProps } from "../../types";
 
+import { useLanguageServerExtension } from "./hooks/useLanguageServerExtension";
 import { usePendingFilePosition } from "./hooks/usePendingFilePosition";
 
 export function CodeView({
@@ -20,6 +21,7 @@ export function CodeView({
 	onPositionRevealed,
 }: ViewProps) {
 	const editorRef = useRef<CodeEditorAdapter | null>(null);
+	const lspExtension = useLanguageServerExtension({ workspaceId, filePath });
 	usePendingFilePosition({
 		editorRef,
 		isReady: document.content.kind === "text",
@@ -62,6 +64,7 @@ export function CodeView({
 			onChange={(next) => document.setContent(next)}
 			onSave={() => void document.save()}
 			editorRef={editorRef}
+			lspExtension={lspExtension}
 			initialScrollPosition={
 				pendingPosition ? undefined : initialScrollPosition
 			}

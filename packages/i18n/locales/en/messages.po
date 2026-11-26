@@ -20351,6 +20351,9 @@ msgstr "The current prompt will be replaced with the selected version. A new \"R
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 
+msgid "The definition is outside this workspace."
+msgstr "The definition is outside this workspace."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 

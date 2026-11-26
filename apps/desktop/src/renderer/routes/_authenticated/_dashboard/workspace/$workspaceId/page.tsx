@@ -109,6 +109,7 @@ import type {
 	SubagentPaneData,
 } from "./types";
 import { isWorktreeMissing } from "./utils/isWorktreeMissing";
+import { registerLanguageServerFileOpener } from "./utils/languageServer";
 import {
 	closeVisibleChangesPane,
 	findVisibleChangesPane,
@@ -386,6 +387,7 @@ function WorkspaceContent() {
 	});
 
 	const {
+		openFilePane,
 		openFilePaneFromTreeClick,
 		openPinnedFilePane,
 		revealPath,
@@ -397,6 +399,13 @@ function WorkspaceContent() {
 		viewer: viewerTarget,
 		setRightSidebarOpen,
 	});
+	useEffect(
+		() =>
+			registerLanguageServerFileOpener(workspace.id, (path) =>
+				openFilePane(path),
+			),
+		[workspace.id, openFilePane],
+	);
 
 	const {
 		openDiffPane,

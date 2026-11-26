@@ -106,25 +106,29 @@ function copyModuleIfSymlink(
 	return true;
 }
 
-function copyParcelWatcherPlatformPackages(nodeModulesDir: string): void {
-	const watcherPath = join(nodeModulesDir, "@parcel", "watcher");
-	const watcherPkgJsonPath = join(watcherPath, "package.json");
-	if (!existsSync(watcherPkgJsonPath)) return;
+/** Copies the platform packages of `parentName` (its optional dependencies named `prefix*`). */
+function copyPlatformPackages(
+	nodeModulesDir: string,
+	parentName: string,
+	prefix: string,
+): void {
+	const parentPkgJsonPath = join(nodeModulesDir, parentName, "package.json");
+	if (!existsSync(parentPkgJsonPath)) return;
 
-	type ParcelWatcherPackageJson = {
+	type ParentPackageJson = {
 		optionalDependencies?: Record<string, string>;
 	};
-	const watcherPkg = JSON.parse(
-		readFileSync(watcherPkgJsonPath, "utf8"),
-	) as ParcelWatcherPackageJson;
-	const optionalDeps = watcherPkg.optionalDependencies ?? {};
+	const parentPkg = JSON.parse(
+		readFileSync(parentPkgJsonPath, "utf8"),
+	) as ParentPackageJson;
+	const optionalDeps = parentPkg.optionalDependencies ?? {};
 	const platformPackages = Object.entries(optionalDeps)
-		.filter(([name]) => name.startsWith("@parcel/watcher-"))
+		.filter(([name]) => name.startsWith(prefix))
 		.map(([name, version]) => ({ name, version }));
 
 	if (platformPackages.length === 0) return;
 
-	console.log("\nPreparing parcel watcher platform package...");
+	console.log(`\nPreparing ${parentName} platform package...`);
 	const bunStoreDir = getBunStoreDir(nodeModulesDir);
 	let resolvedPlatformPackage = false;
 
@@ -170,7 +174,7 @@ function copyParcelWatcherPlatformPackages(nodeModulesDir: string): void {
 
 	if (!resolvedPlatformPackage) {
 		console.error(
-			"  [ERROR] No `@parcel/watcher-<platform>` runtime package was materialized",
+			`  [ERROR] No \`${prefix}<platform>\` runtime package was materialized`,
 		);
 		process.exit(1);
 	}
@@ -190,7 +194,8 @@ function prepareNativeModules() {
 		copyModuleIfSymlink(nodeModulesDir, moduleName, true);
 	}
 
-	copyParcelWatcherPlatformPackages(nodeModulesDir);
+	copyPlatformPackages(nodeModulesDir, "@parcel/watcher", "@parcel/watcher-");
+	copyPlatformPackages(nodeModulesDir, "typescript", "@typescript/typescript-");
 
 	console.log("\nDone!");
 }

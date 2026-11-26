@@ -20351,6 +20351,9 @@ msgstr "Prompt hiện tại sẽ được thay bằng phiên bản đã chọn. 
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Daemon không chuyển được các phiên đang chạy sang bản binary mới. Lý do:"
 
+msgid "The definition is outside this workspace."
+msgstr "Định nghĩa nằm ngoài workspace này."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Chúng tôi đang đưa Paradev lên Windows & Linux. Để lại email và chúng tôi sẽ báo ngay khi sẵn sàng."
 

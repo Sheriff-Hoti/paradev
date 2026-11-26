@@ -20351,6 +20351,9 @@ msgstr "当前提示词会被所选版本替换。历史中会新增一条“已
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "守护进程无法将你的活动会话移交给新的二进制文件。原因："
 
+msgid "The definition is outside this workspace."
+msgstr "定义位于此工作区之外。"
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "桌面应用目前支持macOS和Linux。留下邮箱，Windows版本一发布就通知你。"
 

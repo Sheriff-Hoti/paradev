@@ -20351,6 +20351,9 @@ msgstr "Prompt saat ini akan diganti dengan versi yang dipilih. Entri \"Dipulihk
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Daemon tidak bisa menyerahkan sesi aktif Anda ke biner yang baru. Alasan:"
 
+msgid "The definition is outside this workspace."
+msgstr "Definisi berada di luar workspace ini."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Kami sedang membawa Paradev ke Windows & Linux. Tinggalkan email Anda dan kami akan mengabari begitu siap."
 

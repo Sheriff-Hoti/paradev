@@ -107,6 +107,11 @@ const deviceHubUnpackGlobs = [
 	"**/node_modules/@fastify/busboy/**/*",
 ];
 
+/** host-service spawns the TypeScript 7 native compiler as the TS/JS language server. */
+const typescriptNativeCopy = copyModuleSubtree("@typescript", [
+	"typescript-*/**/*",
+]);
+
 const packagedSupportModules = [
 	copyWholeModule("bindings"),
 	copyWholeModule("file-uri-to-path"),
@@ -125,6 +130,7 @@ export const mainExternalizedDependencies = [
 export const packagedNodeModuleCopies = [
 	...externalizedRuntimeModules.flatMap((module) => module.packagedCopies),
 	...packagedSupportModules,
+	typescriptNativeCopy,
 ];
 
 /** The same leftovers for the copy electron-builder makes of every package in `dependencies`. */
@@ -141,6 +147,7 @@ export const packagedAsarUnpackGlobs = [
 	...deviceHubUnpackGlobs,
 	"**/node_modules/bindings/**/*",
 	"**/node_modules/file-uri-to-path/**/*",
+	"**/node_modules/@typescript/typescript-*/**/*",
 ];
 
 export const requiredMaterializedNodeModules = [

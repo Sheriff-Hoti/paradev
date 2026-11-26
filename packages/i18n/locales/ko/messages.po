@@ -20351,6 +20351,9 @@ msgstr "현재 프롬프트가 선택한 버전으로 교체됩니다. 기록에
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "데몬이 실행 중인 세션을 새 바이너리로 넘기지 못했습니다. 이유:"
 
+msgid "The definition is outside this workspace."
+msgstr "정의가 이 워크스페이스 밖에 있습니다."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Paradev를 Windows와 Linux로 확장하고 있습니다. 이메일을 남겨 주시면 준비되는 대로 알려 드립니다."
 

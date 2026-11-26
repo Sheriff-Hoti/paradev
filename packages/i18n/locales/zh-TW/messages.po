@@ -20351,6 +20351,9 @@ msgstr "目前提示詞會被所選版本替換。歷史中會新增一條「已
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "守護程式無法將你的活動會話移交給新的二進位檔案。原因："
 
+msgid "The definition is outside this workspace."
+msgstr "定義位於此工作區之外。"
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "我們正在把Paradev帶到Windows和Linux。留下電子郵件，一上線就通知你。"
 

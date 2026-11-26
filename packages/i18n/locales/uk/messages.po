@@ -20345,6 +20345,9 @@ msgstr "Поточний промпт буде замінено вибраною
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Демону не вдалося передати ваші активні сеанси новому бінарному файлу. Причина:"
 
+msgid "The definition is outside this workspace."
+msgstr "Визначення знаходиться поза цим робочим простором."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Десктопний застосунок уже працює на macOS і Linux. Залиште свою електронну адресу, і ми повідомимо вас, щойно вийде збірка для Windows."
 
