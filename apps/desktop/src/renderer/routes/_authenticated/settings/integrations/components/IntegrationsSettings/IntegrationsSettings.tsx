@@ -16,6 +16,7 @@ import { SiLinear, SiNotion, SiSentry } from "react-icons/si";
 import {
 	GATED_FEATURES,
 	type GatedFeature,
+	HIDE_PRO_UI,
 	usePaywall,
 } from "renderer/components/Paywall";
 import { env } from "renderer/env.renderer";
@@ -241,6 +242,7 @@ export function IntegrationsSettings({
 					if (!isItemVisible(itemId, visibleItems)) return null;
 					const state = providerStates[integration.provider];
 					const gate = PRO_GATED[integration.provider];
+					if (gate && HIDE_PRO_UI) return null;
 					const openWeb = () => handleOpenWeb(integration.webPath);
 					return (
 						<IntegrationRow

@@ -27,6 +27,7 @@ import {
 	HiOutlineUserGroup,
 } from "react-icons/hi2";
 import { LuGitBranch, LuKeyboard, LuKeyRound, LuLink } from "react-icons/lu";
+import { HIDDEN_PRO_SETTINGS_SECTIONS } from "renderer/components/Paywall/hiddenProUi";
 import type { SettingsSection } from "renderer/stores/settings-state";
 
 export type SettingsRoute =
@@ -371,6 +372,7 @@ export function isSettingsSectionVisible(
 		(item.section !== "plugins" || visibility.pluginsEnabled) &&
 		(item.section !== "cloudUsage" || visibility.cloudUsageEnabled) &&
 		(!item.adminOnly || visibility.isAdmin) &&
+		!HIDDEN_PRO_SETTINGS_SECTIONS.has(item.section) &&
 		visibility.allowedSections.has(item.section)
 	);
 }

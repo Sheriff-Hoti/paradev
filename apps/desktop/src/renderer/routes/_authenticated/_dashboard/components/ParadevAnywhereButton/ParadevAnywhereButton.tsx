@@ -9,6 +9,7 @@ import { toast } from "@superset/ui/sonner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@superset/ui/tooltip";
 import { cn } from "@superset/ui/utils";
 import { type ComponentProps, type RefObject, useState } from "react";
+import { HIDE_PRO_UI } from "renderer/components/Paywall";
 import { track } from "renderer/lib/analytics";
 import {
 	RAIL_ICON_CLASS,
@@ -58,7 +59,7 @@ export function ParadevAnywhereButton({
 		});
 	};
 
-	if (!isShown) return null;
+	if (!isShown || HIDE_PRO_UI) return null;
 
 	return (
 		<Popover open={isOpen} onOpenChange={handleOpenChange}>

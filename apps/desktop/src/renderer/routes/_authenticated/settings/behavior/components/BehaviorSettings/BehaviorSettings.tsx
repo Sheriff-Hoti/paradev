@@ -8,6 +8,7 @@ import {
 	SelectValue,
 } from "@superset/ui/select";
 import { Switch } from "@superset/ui/switch";
+import { HIDE_PRO_UI } from "renderer/components/Paywall";
 import { electronTrpc } from "renderer/lib/electron-trpc";
 import { HighlightText } from "renderer/routes/_authenticated/settings/components/HighlightText";
 import { type ChangesOpenTarget, useSettings } from "renderer/stores/settings";
@@ -248,7 +249,7 @@ export function BehaviorSettings({ visibleItems }: BehaviorSettingsProps) {
 					</div>
 				)}
 
-				{showParadevAnywhere && (
+				{showParadevAnywhere && !HIDE_PRO_UI && (
 					<div className="flex items-center justify-between">
 						<div className="space-y-0.5">
 							<Label htmlFor="paradev-anywhere" className="text-sm font-medium">

@@ -2,7 +2,11 @@ import { getInvitableRoles } from "@superset/shared/auth";
 import { isPaidPlanTier } from "@superset/shared/billing";
 import { type InviteNewMode, shareDirectory } from "@superset/ui/share-access";
 import { useCallback, useMemo } from "react";
-import { GATED_FEATURES, usePaywall } from "renderer/components/Paywall";
+import {
+	GATED_FEATURES,
+	HIDE_PRO_UI,
+	usePaywall,
+} from "renderer/components/Paywall";
 import { useActiveOrganizationId } from "renderer/hooks/useActiveOrganizationId";
 import { useCurrentPlan } from "renderer/hooks/useCurrentPlan";
 import { authClient } from "renderer/lib/auth-client";
@@ -34,7 +38,9 @@ export function useShareDirectory() {
 
 	const inviteNew: InviteNewMode =
 		isReady && !isPaidPlanTier(plan)
-			? "upgrade"
+			? HIDE_PRO_UI
+				? "admins-only"
+				: "upgrade"
 			: role && getInvitableRoles(role).includes("member")
 				? "allowed"
 				: "admins-only";
