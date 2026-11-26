@@ -2,6 +2,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { COMPANY } from "@superset/shared/constants";
 import { Label } from "@superset/ui/label";
 import { HiArrowTopRightOnSquare } from "react-icons/hi2";
+import { HIDE_PRO_UI } from "renderer/components/Paywall";
 import { HighlightText } from "renderer/routes/_authenticated/settings/components/HighlightText";
 import { useSettingsSearchQuery } from "renderer/stores/settings-state";
 import { RemoteAccessSwitch } from "../RemoteAccessSwitch";
@@ -9,6 +10,8 @@ import { RemoteAccessSwitch } from "../RemoteAccessSwitch";
 export function ExposeViaRelaySection() {
 	const { t } = useLingui();
 	const searchQuery = useSettingsSearchQuery();
+
+	if (HIDE_PRO_UI) return null;
 
 	return (
 		<div className="flex items-start justify-between gap-6">

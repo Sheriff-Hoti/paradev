@@ -141,8 +141,10 @@ function visible(
 }
 
 describe("settings search - mobile", () => {
-	it("finds the mobile section", () => {
-		expect(getVisibleMatchCountBySection("iPhone", visible()).mobile).toBe(1);
+	it("does not find the hidden mobile section", () => {
+		expect(
+			getVisibleMatchCountBySection("iPhone", visible()).mobile,
+		).toBeUndefined();
 	});
 });
 

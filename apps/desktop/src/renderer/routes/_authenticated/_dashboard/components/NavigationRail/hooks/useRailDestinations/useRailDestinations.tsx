@@ -5,6 +5,7 @@ import type { ComponentType } from "react";
 import { PiChatsCircle, PiClockClockwise } from "react-icons/pi";
 import { TbGitPullRequest, TbNote, TbStack2 } from "react-icons/tb";
 import { VscExtensions } from "react-icons/vsc";
+import { HIDE_PRO_UI } from "renderer/components/Paywall";
 import { env } from "renderer/env.renderer";
 import type { useDashboardNavigation } from "renderer/routes/_authenticated/_dashboard/hooks/useDashboardNavigation";
 import { useFailedAutomations } from "renderer/routes/_authenticated/_dashboard/hooks/useFailedAutomations";
@@ -92,6 +93,7 @@ export function useRailDestinations(
 				myFailedCount > 0
 					? navigation.openFailedAutomations
 					: navigation.openAutomations,
+			isAvailable: !HIDE_PRO_UI,
 		},
 		{
 			id: "tasks",
@@ -99,6 +101,7 @@ export function useRailDestinations(
 			icon: SolarCheckCircleIcon,
 			isActive: navigation.isTasksOpen,
 			onClick: navigation.openTasks,
+			isAvailable: !HIDE_PRO_UI,
 		},
 		{
 			id: "pullRequests",

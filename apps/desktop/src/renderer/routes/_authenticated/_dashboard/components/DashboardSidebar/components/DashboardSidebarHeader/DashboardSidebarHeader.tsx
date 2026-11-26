@@ -19,6 +19,7 @@ import {
 } from "react-icons/lu";
 import { TbStack2 } from "react-icons/tb";
 import { VscFolderOpened, VscNewFolder } from "react-icons/vsc";
+import { HIDE_PRO_UI } from "renderer/components/Paywall";
 import { ZoomStable } from "renderer/components/ZoomStable";
 import { env } from "renderer/env.renderer";
 import { useZoomFactor } from "renderer/hooks/useZoomFactor";
@@ -157,68 +158,72 @@ export function DashboardSidebarHeader({
 						</TooltipContent>
 					</Tooltip>
 
-					<Tooltip delayDuration={300}>
-						<TooltipTrigger asChild>
-							<button
-								type="button"
-								onClick={navigation.openAutomations}
-								aria-label={
-									myFailedCount > 0
-										? t({
-												message: `Automations, ${myFailedCount} failing`,
-											})
-										: t({
-												message: "Automations",
-											})
-								}
-								className={cn(
-									"relative flex size-7 items-center justify-center rounded-md transition-colors",
-									navigation.isAutomationsOpen
-										? "bg-fill-selected text-muted-foreground"
-										: "text-muted-foreground hover:bg-fill-hover",
+					{!HIDE_PRO_UI && (
+						<Tooltip delayDuration={300}>
+							<TooltipTrigger asChild>
+								<button
+									type="button"
+									onClick={navigation.openAutomations}
+									aria-label={
+										myFailedCount > 0
+											? t({
+													message: `Automations, ${myFailedCount} failing`,
+												})
+											: t({
+													message: "Automations",
+												})
+									}
+									className={cn(
+										"relative flex size-7 items-center justify-center rounded-md transition-colors",
+										navigation.isAutomationsOpen
+											? "bg-fill-selected text-muted-foreground"
+											: "text-muted-foreground hover:bg-fill-hover",
+									)}
+								>
+									<LuClock className="size-3.5" strokeWidth={1.5} />
+									{myFailedCount > 0 && (
+										<span
+											aria-hidden="true"
+											className="absolute right-1 top-1 size-1.5 rounded-full bg-red-500"
+										/>
+									)}
+								</button>
+							</TooltipTrigger>
+							<TooltipContent side="right">
+								{myFailedCount > 0 ? (
+									<Trans>Automations ({myFailedCount} failing)</Trans>
+								) : (
+									<Trans>Automations</Trans>
 								)}
-							>
-								<LuClock className="size-3.5" strokeWidth={1.5} />
-								{myFailedCount > 0 && (
-									<span
-										aria-hidden="true"
-										className="absolute right-1 top-1 size-1.5 rounded-full bg-red-500"
-									/>
-								)}
-							</button>
-						</TooltipTrigger>
-						<TooltipContent side="right">
-							{myFailedCount > 0 ? (
-								<Trans>Automations ({myFailedCount} failing)</Trans>
-							) : (
-								<Trans>Automations</Trans>
-							)}
-						</TooltipContent>
-					</Tooltip>
+							</TooltipContent>
+						</Tooltip>
+					)}
 
-					<Tooltip delayDuration={300}>
-						<TooltipTrigger asChild>
-							<button
-								type="button"
-								onClick={navigation.openTasks}
-								aria-label={t({
-									message: "Tasks",
-								})}
-								aria-current={navigation.isTasksOpen ? "page" : undefined}
-								className={cn(
-									"flex size-7 items-center justify-center rounded-md transition-colors",
-									navigation.isTasksOpen
-										? "bg-fill-selected text-muted-foreground"
-										: "text-muted-foreground hover:bg-fill-hover",
-								)}
-							>
-								<HiOutlineClipboardDocumentList className="size-3.5" />
-							</button>
-						</TooltipTrigger>
-						<TooltipContent side="right">
-							<Trans>Tasks</Trans>
-						</TooltipContent>
-					</Tooltip>
+					{!HIDE_PRO_UI && (
+						<Tooltip delayDuration={300}>
+							<TooltipTrigger asChild>
+								<button
+									type="button"
+									onClick={navigation.openTasks}
+									aria-label={t({
+										message: "Tasks",
+									})}
+									aria-current={navigation.isTasksOpen ? "page" : undefined}
+									className={cn(
+										"flex size-7 items-center justify-center rounded-md transition-colors",
+										navigation.isTasksOpen
+											? "bg-fill-selected text-muted-foreground"
+											: "text-muted-foreground hover:bg-fill-hover",
+									)}
+								>
+									<HiOutlineClipboardDocumentList className="size-3.5" />
+								</button>
+							</TooltipTrigger>
+							<TooltipContent side="right">
+								<Trans>Tasks</Trans>
+							</TooltipContent>
+						</Tooltip>
+					)}
 
 					<Tooltip delayDuration={300}>
 						<TooltipTrigger asChild>
@@ -402,58 +407,62 @@ export function DashboardSidebarHeader({
 				</span>
 			</button>
 
-			<div className="relative">
+			{!HIDE_PRO_UI && (
+				<div className="relative">
+					<button
+						type="button"
+						onClick={navigation.openAutomations}
+						className={cn(
+							"flex h-7 w-full items-center gap-2 rounded-md px-2 text-[13px] font-medium transition-colors",
+							navigation.isAutomationsOpen
+								? "bg-fill-selected text-foreground"
+								: "text-muted-foreground hover:bg-fill-hover hover:text-foreground",
+						)}
+					>
+						<LuClock
+							className="size-4 shrink-0 text-muted-foreground"
+							strokeWidth={1.5}
+						/>
+						<span className="flex-1 text-left">
+							<Trans>Automations</Trans>
+						</span>
+					</button>
+					{myFailedCount > 0 && (
+						<button
+							type="button"
+							onClick={navigation.openFailedAutomations}
+							title={t({
+								message: `${myFailedCount} of your automations failed their last run`,
+							})}
+							className="absolute right-2 top-1/2 flex h-4 min-w-4 -translate-y-1/2 items-center justify-center rounded-full bg-red-500/15 px-1 text-[10px] font-medium tabular-nums text-red-600 transition-colors hover:bg-red-500/25 dark:text-red-400"
+						>
+							{myFailedCount > 9 ? "9+" : myFailedCount}
+						</button>
+					)}
+				</div>
+			)}
+
+			{!HIDE_PRO_UI && (
 				<button
 					type="button"
-					onClick={navigation.openAutomations}
+					onClick={navigation.openTasks}
+					aria-label={t({
+						message: "Tasks",
+					})}
+					aria-current={navigation.isTasksOpen ? "page" : undefined}
 					className={cn(
 						"flex h-7 w-full items-center gap-2 rounded-md px-2 text-[13px] font-medium transition-colors",
-						navigation.isAutomationsOpen
+						navigation.isTasksOpen
 							? "bg-fill-selected text-foreground"
 							: "text-muted-foreground hover:bg-fill-hover hover:text-foreground",
 					)}
 				>
-					<LuClock
-						className="size-4 shrink-0 text-muted-foreground"
-						strokeWidth={1.5}
-					/>
+					<HiOutlineClipboardDocumentList className="size-4 shrink-0 text-muted-foreground" />
 					<span className="flex-1 text-left">
-						<Trans>Automations</Trans>
+						<Trans>Tasks</Trans>
 					</span>
 				</button>
-				{myFailedCount > 0 && (
-					<button
-						type="button"
-						onClick={navigation.openFailedAutomations}
-						title={t({
-							message: `${myFailedCount} of your automations failed their last run`,
-						})}
-						className="absolute right-2 top-1/2 flex h-4 min-w-4 -translate-y-1/2 items-center justify-center rounded-full bg-red-500/15 px-1 text-[10px] font-medium tabular-nums text-red-600 transition-colors hover:bg-red-500/25 dark:text-red-400"
-					>
-						{myFailedCount > 9 ? "9+" : myFailedCount}
-					</button>
-				)}
-			</div>
-
-			<button
-				type="button"
-				onClick={navigation.openTasks}
-				aria-label={t({
-					message: "Tasks",
-				})}
-				aria-current={navigation.isTasksOpen ? "page" : undefined}
-				className={cn(
-					"flex h-7 w-full items-center gap-2 rounded-md px-2 text-[13px] font-medium transition-colors",
-					navigation.isTasksOpen
-						? "bg-fill-selected text-foreground"
-						: "text-muted-foreground hover:bg-fill-hover hover:text-foreground",
-				)}
-			>
-				<HiOutlineClipboardDocumentList className="size-4 shrink-0 text-muted-foreground" />
-				<span className="flex-1 text-left">
-					<Trans>Tasks</Trans>
-				</span>
-			</button>
+			)}
 
 			<button
 				type="button"
