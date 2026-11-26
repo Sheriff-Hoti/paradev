@@ -20351,6 +20351,9 @@ msgstr "Текущий промпт будет заменён выбранной
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Демону не удалось передать живые сессии новому бинарнику. Причина:"
 
+msgid "The definition is outside this workspace."
+msgstr "Определение находится за пределами этой рабочей области."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Мы готовим Paradev для Windows и Linux. Оставьте email, и мы сообщим, как только будет готово."
 

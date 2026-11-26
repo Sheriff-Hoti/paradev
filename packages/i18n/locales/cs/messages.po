@@ -20351,6 +20351,9 @@ msgstr "Současný prompt bude nahrazen vybranou verzí. Do historie přibude no
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Démon nedokázal předat vaše živé relace nové binárce. Důvod:"
 
+msgid "The definition is outside this workspace."
+msgstr "Definice je mimo tento pracovní prostor."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Paradev chystáme i pro Windows a Linux. Nechte nám e-mail a dáme vám vědět, jakmile bude hotovo."
 

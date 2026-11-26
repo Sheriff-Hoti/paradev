@@ -28,6 +28,7 @@ import {
 } from "./chat-v3";
 import { createDb, type HostDb } from "./db";
 import { EventBus, GitWatcher, registerEventBusRoute } from "./events";
+import { LspServerPool, registerLspRoute, resolveServerCommand } from "./lsp";
 import { agentIsBusy, PageWatchManager } from "./page-watch/index.ts";
 import { registerForwardMuxRoute } from "./ports/forward-mux-route";
 import { portManager } from "./ports/port-manager";
@@ -484,6 +485,7 @@ export function createApp(options: CreateAppOptions): CreateAppResult {
 	app.use("/browser/*", wsAuth);
 	app.use("/desktop/*", wsAuth);
 	app.use("/fwd", wsAuth);
+	app.use("/lsp/*", wsAuth);
 
 	// websockify listens on loopback with no credential of its own, so the
 	// check that admits a pane is this route's. Sandboxes only: on a laptop
@@ -552,6 +554,8 @@ export function createApp(options: CreateAppOptions): CreateAppResult {
 		upgradeWebSocket,
 	});
 	registerChatV3Routes({ app, db, mount: chatV3, upgradeWebSocket });
+	const lspPool = new LspServerPool({ resolveCommand: resolveServerCommand });
+	registerLspRoute({ app, db, pool: lspPool, upgradeWebSocket });
 
 	// tRPC answers a streamed batch before it has read the request body, and
 	// a sandbox's ingress treats that early response as the end of the
@@ -606,6 +610,7 @@ export function createApp(options: CreateAppOptions): CreateAppResult {
 	const ownsDb = options.db === undefined;
 	const dispose = async (): Promise<void> => {
 		stopChatSync?.();
+		lspPool.dispose();
 		agentJobs.stopAll();
 		if (projectPurgeTimer) clearInterval(projectPurgeTimer);
 		if (attachmentSweepTimer) clearInterval(attachmentSweepTimer);

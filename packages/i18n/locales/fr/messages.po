@@ -20351,6 +20351,9 @@ msgstr "Le prompt actuel sera remplacé par la version sélectionnée. Une nouve
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Le démon n'a pas pu transférer vos sessions actives vers le nouveau binaire. Raison :"
 
+msgid "The definition is outside this workspace."
+msgstr "La définition se trouve en dehors de cet espace de travail."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Nous préparons Paradev pour Windows et Linux. Laissez votre e-mail et nous vous préviendrons dès que ce sera prêt."
 

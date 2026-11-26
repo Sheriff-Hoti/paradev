@@ -1,0 +1,1 @@
+export { definitionClick } from "./definitionClick";

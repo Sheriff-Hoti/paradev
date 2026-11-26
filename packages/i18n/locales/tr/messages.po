@@ -20351,6 +20351,9 @@ msgstr "Geçerli istem, seçilen sürümle değiştirilecek. Bunu geri alabilmen
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "Daemon, canlı oturumlarınızı yeni ikili dosyaya devredemedi. Nedeni:"
 
+msgid "The definition is outside this workspace."
+msgstr "Tanım bu çalışma alanının dışında."
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "Paradev'i Windows ve Linux'a getiriyoruz. E-postanızı bırakın, hazır olduğu anda haber verelim."
 

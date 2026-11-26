@@ -20351,6 +20351,9 @@ msgstr "現在のプロンプトが選択したバージョンで置き換えら
 msgid "The daemon couldn't hand off your live sessions to the new binary. Reason:"
 msgstr "デーモンは実行中のセッションを新しいバイナリに引き継げませんでした。理由:"
 
+msgid "The definition is outside this workspace."
+msgstr "定義はこのワークスペースの外にあります。"
+
 msgid "The desktop app runs on macOS and Linux today. Drop your email and we'll let you know the moment the Windows build ships."
 msgstr "デスクトップアプリは現在macOSとLinuxに対応しています。メールアドレスをご登録いただければ、Windows版がリリースされ次第すぐにお知らせします。"
 

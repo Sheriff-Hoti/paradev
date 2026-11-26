@@ -75,6 +75,8 @@ interface CodeEditorProps {
 	fillHeight?: boolean;
 	className?: string;
 	editorRef?: MutableRefObject<CodeEditorAdapter | null>;
+	/** Language server features for this file, such as `LSPClient.plugin`. */
+	lspExtension?: Extension | null;
 	onChange?: (value: string) => void;
 	onSave?: () => void;
 	initialScrollPosition?: { scrollTop: number; scrollLeft: number };
@@ -95,6 +97,7 @@ export function CodeEditor({
 	fillHeight = true,
 	className,
 	editorRef,
+	lspExtension,
 	onChange,
 	onSave,
 	initialScrollPosition,
@@ -110,6 +113,7 @@ export function CodeEditor({
 		theme: Theme;
 	} | null>(null);
 	const editableCompartment = useRef(new Compartment()).current;
+	const lspCompartment = useRef(new Compartment()).current;
 	const onChangeRef = useRef(onChange);
 	const onSaveRef = useRef(onSave);
 	const onScrollPositionChangeRef = useRef(onScrollPositionChange);
@@ -210,6 +214,7 @@ export function CodeEditor({
 					),
 				]),
 				languageCompartment.of([]),
+				lspCompartment.of(lspExtension ?? []),
 				updateListener,
 			],
 		});
@@ -316,6 +321,12 @@ export function CodeEditor({
 			]),
 		});
 	}, [editableCompartment, readOnly]);
+
+	useEffect(() => {
+		const view = viewRef.current;
+		if (!view) return;
+		view.dispatch({ effects: lspCompartment.reconfigure(lspExtension ?? []) });
+	}, [lspCompartment, lspExtension]);
 
 	useEffect(() => {
 		let cancelled = false;
